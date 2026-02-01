@@ -1,7 +1,8 @@
 ---
 title: "YOLOv8s Performance Benchmarks: A Data-Driven GPU Comparison"
 date: "2025-08-20"
-author: "wsmlby"
+author: "wsmlby with Gemini"
+summary: "A comprehensive GPU benchmark comparison for YOLOv8s inference, covering NVIDIA, AMD, and Apple Silicon hardware."
 ---
 
 ### Updates
