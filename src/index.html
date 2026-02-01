@@ -1,0 +1,81 @@
+{% extends "templates/base.html" %}
+{% set title = "Home" %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-4xl md:text-5xl font-extrabold">Welcome to HoML</h2>
+    <p class="text-lg md:text-xl text-gray-400 mt-4">The easiest & fastest way to run LLMs in your home lab.</p>
+    <img src="images/index.png" alt="HoML" class="mt-8 rounded-lg shadow-lg mx-auto" style="max-width: 200px;">
+    <div class="mt-8 flex flex-col md:flex-row justify-center items-center">
+        <a href="download.html" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg mb-4 md:mb-0 md:mr-4">Download</a>
+        <a href="models/" class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-lg text-lg">Explore Models</a>
+    </div>
+</div>
+
+<div class="max-w-4xl mx-auto text-left mt-12 md:mt-16">
+    <h3 class="text-2xl md:text-3xl font-bold mb-6 text-center">Key Features</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <div class="bg-gray-800 rounded-lg p-6">
+            <h4 class="text-xl font-semibold mb-2">Ollama-like Experience</h4>
+            <p class="text-gray-400">A simple, intuitive CLI that just works, inspired by <a href="https://github.com/ollama/ollama" class="text-blue-400 hover:underline">Ollama</a>.</p>
+        </div>
+        <div class="bg-gray-800 rounded-lg p-6">
+            <h4 class="text-xl font-semibold mb-2">High-Performance Inference</h4>
+            <p class="text-gray-400">Powered by <a href="https://github.com/vllm-project/vllm" class="text-blue-400 hover:underline">vLLM</a> for maximum speed and throughput.</p>
+        </div>
+        <div class="bg-gray-800 rounded-lg p-6">
+            <h4 class="text-xl font-semibold mb-2">Automatic GPU Memory Management</h4>
+            <p class="text-gray-400">Models load on demand and unload automatically after a configurable idle time (default 10 mins), freeing up your GPU for other tasks.</p>
+        </div>
+        <div class="bg-gray-800 rounded-lg p-6">
+            <h4 class="text-xl font-semibold mb-2">OpenAI-Compatible API</h4>
+            <p class="text-gray-400">Integrate seamlessly with your existing tools and workflows.</p>
+        </div>
+    </div>
+    <h3 class="text-2xl md:text-3xl font-bold mb-6 text-center">Frequently Used Commands</h3>
+    <div class="grid grid-cols-1 gap-6">
+        <div class="relative bg-gray-800 rounded-lg p-4 md:p-6">
+            <h4 class="text-lg md:text-xl font-semibold mb-2">Pull a model from Hugging Face Hub</h4>
+            <p class="text-gray-400 mb-4">Download a model to your local machine. You can use a shorthand alias for curated models.</p>
+            <div class="relative">
+                <pre class="bg-gray-900 rounded-lg p-4 text-white overflow-x-auto"><code>homl pull qwen3:0.6b</code></pre>
+                <button class="copy-btn absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 hover:bg-gray-600 text-white p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    <span class="copy-tooltip absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs rounded py-1 px-2 opacity-0 pointer-events-none transition-opacity duration-300">Copied!</span>
+                </button>
+            </div>
+        </div>
+        <div class="relative bg-gray-800 rounded-lg p-4 md:p-6">
+            <h4 class="text-lg md:text-xl font-semibold mb-2">Run a model</h4>
+            <p class="text-gray-400 mb-4">Run a downloaded model. This will start the model and make it available for chat and API access.</p>
+            <div class="relative">
+                <pre class="bg-gray-900 rounded-lg p-4 text-white overflow-x-auto"><code>homl run qwen3:0.6b</code></pre>
+                <button class="copy-btn absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 hover:bg-gray-600 text-white p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    <span class="copy-tooltip absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs rounded py-1 px-2 opacity-0 pointer-events-none transition-opacity duration-300">Copied!</span>
+                </button>
+            </div>
+        </div>
+        <div class="relative bg-gray-800 rounded-lg p-4 md:p-6">
+            <h4 class="text-lg md:text-xl font-semibold mb-2">Run a model in interactive chat mode</h4>
+            <p class="text-gray-400 mb-4">Start a conversation with a model.</p>
+            <div class="relative">
+                <pre class="bg-gray-900 rounded-lg p-4 text-white overflow-x-auto"><code>homl chat qwen3:0.6b</code></pre>
+                <button class="copy-btn absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-700 hover:bg-gray-600 text-white p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    <span class="copy-tooltip absolute -top-8 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-xs rounded py-1 px-2 opacity-0 pointer-events-none transition-opacity duration-300">Copied!</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-center mt-8">
+        <a href="docs/cli.html" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg">View All Commands</a>
+    </div>
+</div>
+{% endblock %}
