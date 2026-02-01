@@ -9,8 +9,10 @@
         <div class="flex items-center gap-8">
             <div class="hidden md:flex gap-6 text-sm font-medium text-slate-600 dark:text-slate-400">
                 <a class="hover:text-primary dark:hover:text-primary transition-colors {% if page == 'index.html' %}text-primary{% endif %}" href="/index.html">Latest</a>
-                <a class="hover:text-primary dark:hover:text-primary transition-colors {% if page.startswith('blog') %}text-primary{% endif %}" href="/blogs/index.html">Benchmarks</a>
-                <a class="hover:text-primary dark:hover:text-primary transition-colors" href="#">Data Science</a>
+                {% for tag in top_tags %}
+                <a class="hover:text-primary dark:hover:text-primary transition-colors {% if active_tag == tag %}text-primary{% endif %}" href="/blogs/tag/{{ tag }}.html">{{ tag }}</a>
+                {% endfor %}
+                <a class="hover:text-primary dark:hover:text-primary transition-colors {% if page.startswith('blog') and not active_tag %}text-primary{% endif %}" href="/blogs/index.html">All Posts</a>
             </div>
             <button class="p-2 rounded-full bg-slate-100 dark:bg-white/5 hover:bg-slate-200 dark:hover:bg-white/10 transition-colors" id="theme-toggle">
                 <span class="material-symbols-outlined block" id="theme-toggle-icon">dark_mode</span>
