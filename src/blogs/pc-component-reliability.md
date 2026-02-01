@@ -3,6 +3,7 @@ title: "How Reliable Are Consumer PC Components? A Data-Driven Analysis"
 date: "2026-02-01"
 author: "wsmlby with Claude"
 summary: "If you built 1,000 PCs with consumer parts, how many would still be working perfectly after 30 days? After 3 years? We dig into publicly available failure rate data to find out."
+tags: ["Hardware", "Reliability"]
 ---
 
 # If You Built 1,000 PCs, How Many Would Survive?

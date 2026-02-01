@@ -50,11 +50,11 @@ for filename in os.listdir(BLOGS_DIR):
                         'fenced-code-blocks': None,
                         'tables': None,
                         'html-classes': {
-                            'table': 'w-full my-4 text-left border-collapse shadow-lg rounded-lg overflow-hidden',
-                            'thead': 'bg-gray-700',
-                            'th': 'p-3 font-bold uppercase text-white border-b border-gray-600',
-                            'td': 'p-3 border-b border-gray-800',
-                            'tr': 'hover:bg-gray-800'
+                            'table': 'w-full my-8 text-left border-collapse rounded-xl overflow-hidden border border-slate-200 dark:border-white/10',
+                            'thead': 'bg-slate-50 dark:bg-white/5',
+                            'th': 'p-4 font-bold uppercase text-xs tracking-widest text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-white/10',
+                            'td': 'p-4 border-b border-slate-200 dark:border-white/10 text-sm',
+                            'tr': 'hover:bg-slate-50 dark:hover:bg-white/5 transition-colors'
                         }
                     }
                 )
