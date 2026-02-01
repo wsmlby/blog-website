@@ -76,17 +76,38 @@ for post_data in posts:
                 }
             }
         )
-        html_content = blog_template.render(post=post_data, title=post_data['title'], page='blog', top_tags=top_tags)
+        html_content = blog_template.render(
+            post=post_data,
+            title=post_data['title'],
+            description=post_data.get('summary'),
+            page_path=post_data['path'],
+            page='blog',
+            top_tags=top_tags
+        )
     elif post_data['extension'] == 'html':
         html_template = env.from_string(post_data['raw_content'])
-        html_content = html_template.render(post=post_data, title=post_data['title'], page='blog', top_tags=top_tags)
+        html_content = html_template.render(
+            post=post_data,
+            title=post_data['title'],
+            description=post_data.get('summary'),
+            page_path=post_data['path'],
+            page='blog',
+            top_tags=top_tags
+        )
 
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(html_content)
 
 # Render main blog index page
 blog_index_template = env.get_template('templates/blog_index.html')
-html_content = blog_index_template.render(posts=posts, title="Blog", page='blog', top_tags=top_tags)
+html_content = blog_index_template.render(
+    posts=posts,
+    title="Blog",
+    description="Explore all technical reports, performance benchmarks, and hardware analysis on wsmlby's Tech Blog.",
+    page_path="/blogs/index.html",
+    page='blog',
+    top_tags=top_tags
+)
 output_path = os.path.join(BLOGS_OUTPUT_DIR, 'index.html')
 with open(output_path, 'w', encoding='utf-8') as f:
     f.write(html_content)
@@ -97,6 +118,8 @@ for tag in unique_tags:
     html_content = blog_index_template.render(
         posts=tagged_posts,
         title=f"Posts tagged: {tag}",
+        description=f"Browsing all technical analysis and reports tagged with '{tag}' on wsmlby's Tech Blog.",
+        page_path=f"/blogs/tag/{tag}.html",
         page='blog',
         top_tags=top_tags,
         active_tag=tag
@@ -107,7 +130,14 @@ for tag in unique_tags:
 
 # 7. Render the homepage (index.html) with blog posts
 index_template = env.get_template('index.html')
-html_content = index_template.render(posts=posts, title="Home", page='index.html', top_tags=top_tags)
+html_content = index_template.render(
+    posts=posts,
+    title="Home",
+    description="wsmlby's Tech Blog: Exploring the intersection of high-performance hardware, real-time data analysis, and the future of consumer technology.",
+    page_path="/index.html",
+    page='index.html',
+    top_tags=top_tags
+)
 with open(os.path.join(OUTPUT_DIR, 'index.html'), 'w', encoding='utf-8') as f:
     f.write(html_content)
 
