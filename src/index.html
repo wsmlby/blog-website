@@ -11,6 +11,9 @@
                 <h2 class="text-3xl font-bold group-hover:text-blue-400 transition-colors duration-200">{{ post.title }}</h2>
             </a>
             <p class="text-gray-400 mt-2">Published on {{ post.date }} by {{ post.author }}</p>
+            {% if post.summary %}
+            <p class="text-gray-300 mt-2">{{ post.summary }}</p>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
