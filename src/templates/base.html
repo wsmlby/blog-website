@@ -4,7 +4,27 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>{{ title }} | wsmlby's Tech Blog</title>
-    <meta content="A futuristic, data-driven tech blog exploring hardware performance and reliability." name="description"/>
+    <meta content="{{ description if description else 'A futuristic, data-driven tech blog exploring hardware performance and reliability.' }}" name="description"/>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://blog.wsmlby.info{{ page_path if page_path else '/' }}">
+    <meta property="og:title" content="{{ title }} | wsmlby's Tech Blog">
+    <meta property="og:description" content="{{ description if description else 'A futuristic, data-driven tech blog exploring hardware performance and reliability.' }}">
+    <meta property="og:image" content="https://blog.wsmlby.info/android-chrome-512x512.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://blog.wsmlby.info{{ page_path if page_path else '/' }}">
+    <meta property="twitter:title" content="{{ title }} | wsmlby's Tech Blog">
+    <meta property="twitter:description" content="{{ description if description else 'A futuristic, data-driven tech blog exploring hardware performance and reliability.' }}">
+    <meta property="twitter:image" content="https://blog.wsmlby.info/android-chrome-512x512.png">
+
+    <!-- Mobile App Metadata -->
+    <meta name="apple-mobile-web-app-title" content="wsmlby Blog">
+    <meta name="application-name" content="wsmlby Blog">
+    <meta name="msapplication-TileColor" content="#020617">
+    <meta name="theme-color" content="#020617">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
