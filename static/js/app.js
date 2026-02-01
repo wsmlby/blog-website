@@ -9,67 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // AI Apps dropdown (Desktop)
-    const dropdownButton = document.getElementById('ai-apps-dropdown-button');
-    const dropdownMenu = document.getElementById('ai-apps-dropdown-menu');
-    if (dropdownButton && dropdownMenu) {
-        dropdownButton.addEventListener('click', (event) => {
-            event.stopPropagation();
-            dropdownMenu.classList.toggle('hidden');
-        });
-    }
-
-    // AI Apps dropdown (Mobile)
-    const mobileDropdownButton = document.getElementById('mobile-ai-apps-dropdown-button');
-    const mobileDropdownMenu = document.getElementById('mobile-ai-apps-dropdown-menu');
-    if (mobileDropdownButton && mobileDropdownMenu) {
-        mobileDropdownButton.addEventListener('click', (event) => {
-            event.stopPropagation();
-            mobileDropdownMenu.classList.toggle('hidden');
-        });
-    }
-
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', (event) => {
-        if (dropdownMenu && !dropdownMenu.classList.contains('hidden') && !dropdownButton.contains(event.target)) {
-            dropdownMenu.classList.add('hidden');
-        }
-        if (mobileDropdownMenu && !mobileDropdownMenu.classList.contains('hidden') && !mobileDropdownButton.contains(event.target)) {
-            mobileDropdownMenu.classList.add('hidden');
-        }
-    });
-
-    // Model search filtering
-    const modelSearch = document.getElementById('model-search');
-    
-    const filterModels = (searchTerm) => {
-        const models = document.querySelectorAll('.model-card');
-        models.forEach(model => {
-            const modelName = model.querySelector('h3').textContent.toLowerCase();
-            const modelDescription = model.querySelector('p').textContent.toLowerCase();
-            if (modelName.includes(searchTerm) || modelDescription.includes(searchTerm)) {
-                model.style.display = '';
-            } else {
-                model.style.display = 'none';
-            }
-        });
-    };
-
-    if (modelSearch) {
-        // Handle live search input
-        modelSearch.addEventListener('input', (e) => {
-            filterModels(e.target.value.toLowerCase());
-        });
-
-        // Check for search query from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const searchQuery = urlParams.get('q');
-        if (searchQuery) {
-            modelSearch.value = searchQuery;
-            filterModels(searchQuery.toLowerCase());
-        }
-    }
-
     // Dynamically add copy buttons to code blocks generated from markdown
     const codeBlocks = document.querySelectorAll('.prose pre');
     codeBlocks.forEach(pre => {

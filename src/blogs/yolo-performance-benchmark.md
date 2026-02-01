@@ -1,7 +1,7 @@
 ---
 title: "YOLOv8s Performance Benchmarks: A Data-Driven GPU Comparison"
 date: "2025-08-20"
-author: "The HoML Team"
+author: "wsmlby"
 ---
 
 ### Updates
