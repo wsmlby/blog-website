@@ -8,7 +8,7 @@ tags: ["GPU", "Performance"]
 
 ### Updates
 
-We've recently expanded our benchmark data! This post now includes new data points for the **AMD 8700G (Radeon 780M iGPU)** running on ROCm 7.1.1 with PyTorch, achieving 128 FPS on single concurrency, and the **Mac Mini M4 (10 Core GPU)**, achieving 272 FPS with 4 concurrent runs. Additionally, the 'Peak Performance: A Hardware Showdown' chart has been updated to display all data points in ascending order of Frames Per Second (FPS) for easier comparison.
+We've recently expanded our benchmark data! This post now includes new data points for the **AMD 8700G (Radeon 780M iGPU)** running on ROCm 7.1.1 with PyTorch, achieving 128 FPS on single concurrency, the **Mac Mini M4 (10 Core GPU)**, achieving 272 FPS with 4 concurrent runs, and the **Intel Arc 130T GPU (on Intel Core Ultra 225H CPU)**, achieving 170 FPS using PyTorch with XPU. Additionally, the 'Peak Performance: A Hardware Showdown' chart has been updated to display all data points in ascending order of Frames Per Second (FPS) for easier comparison.
 
 # Benchmarks
 When evaluating hardware for computer vision tasks, concrete data is often hard to come by. How much faster is a data center GPU like an H100 compared to a consumer-grade RTX 4000 for a real-world workload? Is it worth upgrading from a T4 to an L4? And what is the true performance gap between a GPU and a CPU?
@@ -259,13 +259,18 @@ For CPU-bound inference, a properly configured **OpenVINO is the clear winner**,
 |:--- |:--- |:---:|
 | PyTorch | Mac Mini M4 (10 Core GPU), 4 concurrency | 272 |
 
+### Intel Arc 130T GPU
+| Metric | Configuration | Inference FPS |
+|:--- |:--- |:---:|
+| PyTorch | Intel Arc 130T GPU (on Intel Core Ultra 225H CPU), single concurrency | 170 |
+
 
 <script src="https://cdn.jsdelivr.net/npm/chart.xkcd@1.1/dist/chart.xkcd.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     // Peak Performance Chart
-    const peakPerfLabels = ['CPU', '8700G (iGPU)', 'Mac Mini M4', 'T4', 'A10G', 'L4', 'RTX 4000', 'RTX 4060', 'H100'];
-    const peakPerfData = [28.96, 128, 272, 360, 463.46, 607.25, 920, 992, 6720];
+    const peakPerfLabels = ['CPU', '8700G (iGPU)', 'Intel Arc 130T', 'Mac Mini M4', 'T4', 'A10G', 'L4', 'RTX 4000', 'RTX 4060', 'H100'];
+    const peakPerfData = [28.96, 128, 170, 272, 360, 463.46, 607.25, 920, 992, 6720];
 
     new chartXkcd.Bar(document.getElementById('peakPerformanceChart'), {
         title: 'Peak YOLOv8s Throughput (FPS)',
