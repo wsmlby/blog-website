@@ -8,7 +8,11 @@ tags: ["GPU", "Performance"]
 
 ### Updates
 
-We've recently expanded our benchmark data! This post now includes new data points for the **AMD 8700G (Radeon 780M iGPU)** running on ROCm 7.1.1 with PyTorch, achieving 128 FPS on single concurrency, the **Mac Mini M4 (10 Core GPU)**, achieving 272 FPS with 4 concurrent runs, and the **Intel Arc 130T GPU (on Intel Core Ultra 225H CPU)**, achieving 170 FPS using PyTorch with XPU. Additionally, the 'Peak Performance: A Hardware Showdown' chart has been updated to display all data points in ascending order of Frames Per Second (FPS) for easier comparison.
+We've recently expanded our benchmark data! This post now includes new data points for the **AMD 8700G (Radeon 780M iGPU)** running on ROCm 7.1.1 with PyTorch, achieving 128 FPS on single concurrency, the **Mac Mini M4 (10 Core GPU)**, achieving 272 FPS with 4 concurrent runs.
+
+### Update 2026/02/04
+Add data for **Intel Core Ultra 225H CPU and its GPU/NPU**, in a new section below.
+
 
 # Benchmarks
 When evaluating hardware for computer vision tasks, concrete data is often hard to come by. How much faster is a data center GPU like an H100 compared to a consumer-grade RTX 4000 for a real-world workload? Is it worth upgrading from a T4 to an L4? And what is the true performance gap between a GPU and a CPU?
@@ -116,6 +120,27 @@ While GPUs are king, sometimes you're limited to a CPU. We tested both PyTorch a
 | **OpenVINO**| **4** | **28.96** |
 
 For CPU-bound inference, a properly configured **OpenVINO is the clear winner**, delivering a **27% performance improvement** over native PyTorch. If you must run on a CPU, optimizing your software stack is critical, and OpenVINO is the right tool for the job.
+## Intel Core Ultra 225H: GPU + NPU
+
+The Intel Core Ultra 225H mobile processor features an integrated Intel Arc 130T GPU (7 Xe cores, 63 INT8 TOPS) and a dedicated Intel AI Boost NPU (13 INT8 TOPS).
+
+YOLOv8s benchmarks show:
+
+| Framework | Device | Inference FPS |
+|:--- |:---:|:---:|
+| PyTorch | GPU | 170 |
+| OpenVINO| GPU | 920 |
+| OpenVINO| NPU | 286 |
+| OpenVINO(*NMS removed)| NPU + GPU | 1125(900 GPU + 225 NPU)|
+
+** NMS use a significant amount of CPU when running at high FPS, so it was removed just to show the pure inference performance when running NPU + GPU(tested in 2 separate processes).
+
+OpenVINO optimization significantly boosts performance, especially with the NPU or combined GPU+NPU workflows. Intel Arrow Lake-H Series delivers impressive result with excellent software support.
+
+<svg id="intelUltraChart" class="my-8"></svg>
+<p class="text-center text-sm text-gray-600 -mt-4">
+    <strong>Note:</strong> Performance benchmarks for Intel Core Ultra 225H.
+</p>
 
 ## Conclusion & Key Takeaways
 
@@ -263,6 +288,14 @@ For CPU-bound inference, a properly configured **OpenVINO is the clear winner**,
 | Metric | Configuration | Inference FPS |
 |:--- |:--- |:---:|
 | PyTorch | Intel Arc 130T GPU (on Intel Core Ultra 225H CPU), single concurrency | 170 |
+
+### Intel Core Ultra 225H
+| Metric | Configuration | Inference FPS |
+|:--- |:--- |:---:|
+| GPU | PyTorch (XPU backend) | 170 |
+| GPU | OpenVINO | 920 |
+| NPU | OpenVINO | 286 |
+| GPU + NPU | OpenVINO (NMS removed) | 1125 |
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.xkcd@1.1/dist/chart.xkcd.min.js"></script>
@@ -419,6 +452,24 @@ document.addEventListener('DOMContentLoaded', function () {
             showLine: true,
             timeFormat: undefined,
             dotSize: 1,
+        }
+    });
+    // Intel Core Ultra 225H Chart
+    const intelUltraLabels = ['GPU (PyTorch XPU)', 'NPU (OpenVINO)', 'GPU (OpenVINO)', 'GPU+NPU (OpenVINO, no NMS)'];
+    const intelUltraData = [170, 286, 920, 1125];
+
+    new chartXkcd.Bar(document.getElementById('intelUltraChart'), {
+        title: 'Intel Core Ultra 225H YOLOv8s Performance (FPS)',
+        xLabel: 'Configuration',
+        yLabel: 'Frames Per Second',
+        data: {
+            labels: intelUltraLabels,
+            datasets: [{
+                data: intelUltraData,
+            }]
+        },
+        options: {
+            yTickCount: 5,
         }
     });
 });
